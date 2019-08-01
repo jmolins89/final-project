@@ -1,4 +1,7 @@
 input/*
+.DS_Store
+images_train.csv
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

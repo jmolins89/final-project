@@ -15,7 +15,7 @@ def addimagesdf(df,test_train_val,type,code_type,counter):
     :param counter: Indicar el primer valor desde el que empieza el contador
     :return: Devuelve el df con las columnas añadidas, devuelve el valor desde el que empezará el siguiente contador
     '''
-    mypath = '/Users/molins/Desktop/FINAL PROJECT/chest-xray-resized/{}/{}/'.format(test_train_val,type)
+    mypath = '/Users/molins/Desktop/final-project/input/chest-xray-resized/{}/{}/'.format(test_train_val,type)
     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
     counter=counter
     for imagen in onlyfiles:
@@ -26,7 +26,7 @@ def addimagesdf(df,test_train_val,type,code_type,counter):
                 for i in img:
                     for j in i:
                         lst.append(j)
-                lst.append(0)
+                lst.append(code_type)
                 df[counter] = lst
                 counter += 1
             except AttributeError:
@@ -35,18 +35,18 @@ def addimagesdf(df,test_train_val,type,code_type,counter):
             print(str(e))
     return df,counter
 
-def generate_csv(df,train_test_val):
+def generate_csv(train_test_val):
     df = pd.DataFrame()
     df,counter = addimagesdf(df,train_test_val,'NORMAL',0,0)
     df,counter1 = addimagesdf(df,train_test_val,'PNEUMONIA/BACTERIA',counter,1)
     df,counter2 = addimagesdf(df,train_test_val,'PNEUMONIA/VIRUS',counter,2)
     df = df.T
-    df.to_csv('/Users/molins/Desktop/FINAL PROJECT/images_{}.csv'.format(train_test_val),index=False)
+    df.to_csv('/Users/molins/Desktop/final-project/input/images_{}.csv'.format(train_test_val),index=False)
     return df
 
-generate_csv()
-
-
+# df_train = generate_csv('train')
+# df_test = generate_csv('test')
+# df_val = generate_csv('val')
 
 #arr = np.reshape(img, (1,img.shape[0]*img.shape[1]))
 
