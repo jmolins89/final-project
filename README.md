@@ -4,9 +4,19 @@
 
 Final project - Data Analytics Iron Hack
 
-        ##Pneumonia detector in chest X-Ray images
+## Pneumonia detector in chest X-Ray images
 
+---
 
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
-In the previous images we can't distinguish the case with pneumonia against the case without pneumonia if don't
+![alt text](https://github.com/jmolins89/final-project/blob/master/output/example-images.png)
+
+In the previous images **we can't distinguish the case with pneumonia against the case without pneumonia** if don't
 know anything about chest X-Ray reading.
+
+
+
+In the previous graph we can observe that **the data is unbalanced**, because we have more Pneumonia cases than Normal.
+
+We have to **rebalance** the data to train better a neural network.
+
+We are going to **generate random images of Normal cases**.
