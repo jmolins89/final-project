@@ -5,6 +5,8 @@ import cv2
 import random
 from sklearn.metrics import recall_score,f1_score,precision_score
 import itertools
+import pickle
+from sklearn.metrics import confusion_matrix
 import pandas as pd
 import keras
 import tensorflow as tf
@@ -18,6 +20,11 @@ from keras.models import load_model
 
 
 def createxy(data):
+    '''
+    This function generates
+    :param data:
+    :return:
+    '''
     X, y = [], []
     for features, label in data:
         X.append(features / 255)
@@ -26,6 +33,11 @@ def createxy(data):
 
 
 def createxyshuffled(data):
+    '''
+
+    :param data:
+    :return:
+    '''
     X, y = [], []
     for features, label in data:
         X.append(features)
@@ -94,7 +106,7 @@ def create_training_data(datadir, img_size):
     
     :param datadir: Specify the path to load.
     :param img_size: Specify the size of the image to reshape.
-    :return: Returns a list of lists with images and labels
+    :return: Returns a list of lists with images (X) and labels (y)
     '''
     lst = []
     categories = ['NORMAL', 'PNEUMONIA']
@@ -108,4 +120,29 @@ def create_training_data(datadir, img_size):
                 lst.append([new_array, class_num])  # Appends to the list a tuple with array resized and each label
             except Exception as e:
                 pass
-    return lst
+    random.shuffle(lst)
+    X, y = createxy(lst)
+    X = np.array(X).reshape(-1, img_size, img_size, 1)
+    return X,y
+
+def plot_examples(X,y):
+    dic = {0: 'NORMAL', 1: 'PNEUMONIA'}
+    plt.figure(figsize=(20, 12))
+    for index, img in enumerate(X[:5]):
+        plt.subplot(1, 6, index + 1)
+        plt.imshow(img.reshape(200, 200), cmap='gray')
+        plt.axis('off')
+        plt.title(dic.get(y[index]))
+    plt.show()
+
+def importingdata(path):
+    pickle_in1=open('{}X_train_extended.pickle'.format(path),'rb')
+    pickle_in2=open('{}y_train_extended.pickle'.format(path),'rb')
+    pickle_in3=open('{}X_test.pickle'.format(path),'rb')
+    pickle_in4=open('{}y_test.pickle'.format(path),'rb')
+    pickle_in5=open('{}X_val.pickle'.format(path),'rb')
+    pickle_in6=open('{}y_val.pickle'.format(path),'rb')
+    X_train,y_train=pickle.load(pickle_in1),pickle.load(pickle_in2)
+    X_test,y_test=pickle.load(pickle_in3),pickle.load(pickle_in4)
+    X_val,y_val=pickle.load(pickle_in5),pickle.load(pickle_in6)
+    return X_train,y_train,X_test,y_test,X_val,y_val

@@ -2,6 +2,7 @@ input/*
 .DS_Store
 images_train.csv
 *.pickle
+.idea/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
