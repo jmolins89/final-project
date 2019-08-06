@@ -1,6 +1,6 @@
 ![IronHack Logo](https://s3-eu-west-1.amazonaws.com/ih-materials/uploads/upload_d5c5793015fec3be28a63c4fa3dd4d55.png)
 
-# To Pneumonia or not Pneumonia...
+# Convolutional Neural Network to detect Pneumonia...
 
 Final project - Data Analytics Iron Hack
 
@@ -13,10 +13,14 @@ Final project - Data Analytics Iron Hack
 In the previous images **we can't distinguish the case with pneumonia against the case without pneumonia** if don't
 know anything about chest X-Ray reading.
 
-
+![alt text](https://github.com/jmolins89/final-project/blob/master/output/plotting-unbalanced-dataset.png)
 
 In the previous graph we can observe that **the data is unbalanced**, because we have more Pneumonia cases than Normal.
 
 We have to **rebalance** the data to train better a neural network.
 
 We are going to **generate random images of Normal cases**.
+
+![alt text](https://github.com/jmolins89/final-project/blob/master/output/example-different-way-to-duplicate-images.png)
+
+
