@@ -141,6 +141,7 @@ def importingdata(path,type):
     X,y=pickle.load(pickle_in1),pickle.load(pickle_in2)
     return X,y
 
+
 def plotting_acc_loss_evolution(model):
     '''
     This function plots the evolution of the training and validation accuracy and loss in the fitting time

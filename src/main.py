@@ -10,11 +10,9 @@ def parse():
 
     grupo.add_argument('-e', '--eval', help='Muestra un resumen del modelo generado.',action='store_true')  # action guarda el argumento
     grupo.add_argument('-p', '--pred', help='Predice el resultado de una  nueva imagen de rayos X.', action='store_true')
-    #grupo.add_argument('-m', '--mult', help='Realiza la multiplicacion de dos numeros.', action='store_true')
-    #grupo.add_argument('-d', '--div', help='Realiza la division de dos numeros.', action='store_true')
 
-    #parser.add_argument('images', help='Lista de imágenes a evaluar.', type=list)
-    #parser.add_argument('n2', help='Segundo numero de la operacion.', type=float)
+
+    parser.add_argument('images', help='Lista de imágenes a evaluar.',nargs='+')
 
     return parser.parse_args()
 
@@ -28,17 +26,19 @@ def evaluate():
     print('Processing model...')
     matrix = processing_model(model, X_test, y_test)
 
-def predict():
-    X,y=load_new_image(['/Users/molins/Desktop/final-project/input/chest_xray/val/NORMAL/NORMAL2-IM-1431-0001.jpeg','/Users/molins/Desktop/final-project/input/chest_xray/val/PNEUMONIA/person1954_bacteria_4886.jpeg'],200)
+def predict(list):
+    print('Scanning images...')
+    X,y=load_new_image(list,200)
+    print('Studying if is something wrong...')
     predict_new_images('/Users/molins/Desktop/final-project/output/cnn-chest-x-ray.h5',X,y)
-    print('Work in progress...')
+    #print('Work in progress...')
 
 def main():  # funcion principal
     warnings.filterwarnings("ignore")
     args = parse()
-
+    print(args.images)
     if args.eval: evaluate()
-    elif args.pred:  predict()
+    elif args.pred:  predict(list(args.images))
     else: print(args,'Especifica argumento de entrada -e para evaluar el modelo y -p para evaluar una nueva imagen')
 
 
