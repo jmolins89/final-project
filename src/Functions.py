@@ -237,9 +237,9 @@ def load_internet_image(list_data_dir,labels,IMG_SIZE=200):
 
 def plotting_predictions(predictions,y_theoric):
     dictionary = {0: 'NORMAL', 1: 'PNEUMONIA'}
-    plt.figure(figsize=(12, 5))
+    #plt.figure(figsize=(12, 5))
     for i in range(len(predictions)):
-        plt.subplot(1,len(predictions) , i + 1)
+        plt.subplot(2,len(predictions) , i + 3)
         plt.bar(['Normal', 'Pneumonia'], predictions[i], color=['g', 'r'])
         for j in range(len(predictions[i])):
             plt.text(x=j - 0.1, y=predictions[i][j] / 2, s='{:.2f} %'.format((predictions[i][j]) * 100), size=12)
@@ -250,7 +250,7 @@ def plot_images(X,y,number_of_examples):
     dic = {0: 'NORMAL', 1: 'PNEUMONIA'}
     plt.figure(figsize=(12, 5))
     for index, img in enumerate(X[:number_of_examples]):
-        plt.subplot(1, number_of_examples, index + 1)
+        plt.subplot(2, number_of_examples, index + 1)
         plt.imshow(img.reshape(200, 200), cmap='gray')
         plt.axis('off')
         plt.title('The {} image is a {} case'.format(index+1,dic.get(y[index][1])))
