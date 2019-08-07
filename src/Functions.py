@@ -235,20 +235,21 @@ def load_internet_image(list_data_dir,labels,IMG_SIZE=200):
   else: y = to_categorical(y)
   return X,y
 
-def plotting_predictions(predictions,y_theoric):
+def plotting_predictions(predictions,y_theoric,number_of_examples):
     dictionary = {0: 'NORMAL', 1: 'PNEUMONIA'}
     #plt.figure(figsize=(12, 5))
     for i in range(len(predictions)):
-        plt.subplot(2,len(predictions) , i + 3)
+        plt.subplot(2,len(predictions) , i +1+ number_of_examples)
         plt.bar(['Normal', 'Pneumonia'], predictions[i], color=['g', 'r'])
         for j in range(len(predictions[i])):
             plt.text(x=j - 0.1, y=predictions[i][j] / 2, s='{:.2f} %'.format((predictions[i][j]) * 100), size=12)
         plt.title('This case is suposed to be {},\n and the model predicts:'.format(dictionary.get(y_theoric[i][1])))
+    plt.subplots_adjust(left=0.05, bottom=0.05, right=0.95, top=0.95, wspace=0.3, hspace=0.4)
     plt.show()
 
 def plot_images(X,y,number_of_examples):
     dic = {0: 'NORMAL', 1: 'PNEUMONIA'}
-    plt.figure(figsize=(12, 5))
+    plt.figure(figsize=(14, 7))
     for index, img in enumerate(X[:number_of_examples]):
         plt.subplot(2, number_of_examples, index + 1)
         plt.imshow(img.reshape(200, 200), cmap='gray')

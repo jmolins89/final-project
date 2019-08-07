@@ -35,14 +35,14 @@ def predict(list,labels=['N']):
         plot_images(X,y,len(y))
         print('Studying if is something wrong...')
         predictions=predict_new_images('/Users/molins/Desktop/final-project/output/cnn-chest-x-ray.h5', X, y)
-        plotting_predictions(predictions,y)
+        plotting_predictions(predictions,y,len(y))
     except:
         X,y = load_internet_image(list,labels,200)
         plot_images(X, y, len(y))
         #plt.show()
         print('Studying if is something wrong...')
         predictions=predict_new_images('/Users/molins/Desktop/final-project/output/cnn-chest-x-ray.h5', X, y)
-        plotting_predictions(predictions,y)
+        plotting_predictions(predictions,y,len(y))
 
 
 
