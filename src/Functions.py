@@ -211,17 +211,20 @@ def predict_new_images(path,X,y):
             print('The {}nd image is {} and the model predicts {} with a {:.2f}% of confidence'.format(i+1,dictionary.get(y[i][1]),dictionary.get(predictions[i]),(new_predictions[i][predictions[i]])*100))
     return new_predictions
 
-def load_internet_image(list_data_dir,IMG_SIZE=200):
+def load_internet_image(list_data_dir,labels,IMG_SIZE=200):
   categories = ['NORMAL', 'PNEUMONIA','N','P']
   img_list=[]
   for datadir in list_data_dir:
     img_array = cv2.imread(datadir, cv2.IMREAD_GRAYSCALE)   # resizes the original image to a IMG_SIZE
     new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))    # resizes the original image to a IMG_SIZE
     #datadir=datadir.split('/')
-    print('Write the type of the X Ray image(normal or pneumonia):')
-    response=input()    # Set category by index in categories: 0 -> Normal, 1 -> Pneumonia
-    response=response.upper()
-    class_num = categories.index(str(response))
+    #print('Write the type of the X Ray image(normal or pneumonia):')
+    #response=input()    # Set category by index in categories: 0 -> Normal, 1 -> Pneumonia
+    #response=response.upper()
+    #class_num = categories.index(str(response))
+    image_label=labels[list_data_dir.index(datadir)]
+    image_label=image_label.upper()
+    class_num = (categories.index(str(image_label)))%2
     img_list.append([new_array,class_num])              # Appends to the list a tuple with array resized and each label
   X,y = createxy(img_list)
   X = np.array(X).reshape(-1,IMG_SIZE,IMG_SIZE,1)
