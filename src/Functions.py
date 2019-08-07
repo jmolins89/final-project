@@ -9,14 +9,15 @@ import pickle
 from sklearn.metrics import confusion_matrix
 import pandas as pd
 import keras
-import tensorflow as tf
-from keras.callbacks import TensorBoard
-from time import time
-from keras.models import Sequential
+from keras.models import Sequential,load_model
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Activation, Dropout
 from keras.layers.advanced_activations import ReLU
+from keras.utils import to_categorical
+from keras.callbacks import TensorBoard
+import tensorflow as tf
+from time import time
 from collections import Counter
-from keras.models import load_model
+
 
 
 def createxy(data):
@@ -100,10 +101,9 @@ def plot_confusion_matrix(cm, classes,
     plt.xlabel('Predicted label')
     plt.show()
 
-
 def create_training_data(datadir, img_size):
     '''
-    
+
     :param datadir: Specify the path to load.
     :param img_size: Specify the size of the image to reshape.
     :return: Returns a list of lists with images (X) and labels (y)
@@ -135,14 +135,74 @@ def plot_examples(X,y):
         plt.title(dic.get(y[index]))
     plt.show()
 
-def importingdata(path):
-    pickle_in1=open('{}X_train_extended.pickle'.format(path),'rb')
-    pickle_in2=open('{}y_train_extended.pickle'.format(path),'rb')
-    pickle_in3=open('{}X_test.pickle'.format(path),'rb')
-    pickle_in4=open('{}y_test.pickle'.format(path),'rb')
-    pickle_in5=open('{}X_val.pickle'.format(path),'rb')
-    pickle_in6=open('{}y_val.pickle'.format(path),'rb')
-    X_train,y_train=pickle.load(pickle_in1),pickle.load(pickle_in2)
-    X_test,y_test=pickle.load(pickle_in3),pickle.load(pickle_in4)
-    X_val,y_val=pickle.load(pickle_in5),pickle.load(pickle_in6)
-    return X_train,y_train,X_test,y_test,X_val,y_val
+def importingdata(path,type):
+    pickle_in1=open('{}X_{}.pickle'.format(path,type),'rb')
+    pickle_in2=open('{}y_{}.pickle'.format(path,type),'rb')
+    X,y=pickle.load(pickle_in1),pickle.load(pickle_in2)
+    return X,y
+
+def plotting_acc_loss_evolution(model):
+    '''
+    This function plots the evolution of the training and validation accuracy and loss in the fitting time
+    :param model: the fitted model you want to plot
+    :return: two graphs
+    '''
+    acc = model.history['acc']
+    val_acc = model.history['val_acc']
+    loss = model.history['loss']
+    val_loss = model.history['val_loss']
+    epochs = range(len(acc))
+    plt.plot(epochs, acc, 'r', label='Training acc')
+    plt.plot(epochs, val_acc, 'b', label='Validation acc')
+    plt.title('Training and validation accuracy')
+    plt.ylabel('accuracy')
+    plt.xlabel('epoch')
+    plt.legend()
+    plt.figure()
+    plt.plot(epochs, loss, 'r', label='Training loss')
+    plt.plot(epochs, val_loss, 'b', label='Validation loss')
+    plt.title('Training and validation loss')
+    plt.ylabel('loss')
+    plt.xlabel('epoch')
+    plt.legend()
+    plt.show()
+
+def processing_model(model,X_test,y_test):
+    y_test_binary = to_categorical(y_test)
+    predictions = model.predict(X_test)
+    matrix = confusion_matrix(y_test_binary.argmax(axis=1), predictions.argmax(axis=1))
+    preds = np.argmax(model.predict(X_test), axis=1)
+    cm = confusion_matrix([np.argmax(i) for i in y_test_binary], preds)
+    keys = ['NORMAL', 'PNEUMONIA']
+    plt.figure(figsize=(8, 8))
+    plot_confusion_matrix(cm, keys, normalize=True)
+    return predictions, matrix
+
+def loading_model(path):
+    return load_model(path)
+
+def load_new_image(list_data_dir,IMG_SIZE=200):
+  categories = ['NORMAL', 'PNEUMONIA']
+  img_list=[]
+  for datadir in list_data_dir:
+    img_array = cv2.imread(datadir, cv2.IMREAD_GRAYSCALE)   # resizes the original image to a IMG_SIZE
+    new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))    # resizes the original image to a IMG_SIZE
+    datadir=datadir.split('/')
+    class_num=categories.index(datadir[-2])     # Set category by index in categories: 0 -> Normal, 1 -> Pneumonia
+    img_list.append([new_array,class_num])              # Appends to the list a tuple with array resized and each label
+  X,y = createxy(img_list)
+  X = np.array(X).reshape(-1,IMG_SIZE,IMG_SIZE,1)
+  y = to_categorical(y)
+  return X,y
+
+def predict_new_images(path,X,y):
+    dictionary={0:'NORMAL',1:'PNEUMONIA'}
+    model=loading_model(path)
+    new_predictions = model.predict(X)
+    matrix_loaded = confusion_matrix(y.argmax(axis=1), new_predictions.argmax(axis=1))
+    predictions=[np.argmax(new_predictions[i]) for i in range(len(new_predictions))]
+    for i in range(len(predictions)):
+        if i==0:
+            print('The {}st image is {} and the model predicts {}'.format(i+1,dictionary.get(predictions[i]),dictionary.get(y[1][i])))
+        else:
+            print('The {}nd image is {} and the model predicts {}'.format(i+1,dictionary.get(predictions[i]),dictionary.get(y[1][i])))
