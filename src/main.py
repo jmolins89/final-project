@@ -28,9 +28,18 @@ def evaluate():
 
 def predict(list):
     print('Scanning images...')
-    X,y=load_new_image(list,200)
-    print('Studying if is something wrong...')
-    predict_new_images('/Users/molins/Desktop/final-project/output/cnn-chest-x-ray.h5',X,y)
+    try:
+        X,y = load_new_image(list,200)
+        print('Studying if is something wrong...')
+        predict_new_images('/Users/molins/Desktop/final-project/output/cnn-chest-x-ray.h5', X, y)
+    except:
+        X,y = load_internet_image(list,200)
+        print(y)
+        print('Studying if is something wrong...')
+        predict_new_images('/Users/molins/Desktop/final-project/output/cnn-chest-x-ray.h5', X, y)
+        print('Work in progress...')
+
+
     #print('Work in progress...')
 
 def main():  # funcion principal

@@ -200,10 +200,40 @@ def predict_new_images(path,X,y):
     dictionary={0:'NORMAL',1:'PNEUMONIA'}
     model=loading_model(path)
     new_predictions = model.predict(X)
-    matrix_loaded = confusion_matrix(y.argmax(axis=1), new_predictions.argmax(axis=1))
+    #matrix_loaded = confusion_matrix(y.argmax(axis=1), new_predictions.argmax(axis=1))
     predictions=[np.argmax(new_predictions[i]) for i in range(len(new_predictions))]
     for i in range(len(predictions)):
         if i==0:
-            print('The {}st image is {} and the model predicts {}'.format(i+1,dictionary.get(predictions[i]),dictionary.get(y[1][i])))
+            try:
+                print(y)
+                print('The {}st image is {} and the model predicts {} with a {}% of confidence'.format(i+1,dictionary.get(y[i][1]),dictionary.get(predictions[i]),round((new_predictions[i][predictions[i]])*100,2)))
+            except:
+                print(y)
+                print('The {}st image is {} and the model predicts {} with a {}% of confidence'.format(i + 1,dictionary.get(y[i][0]), dictionary.get(predictions[i]),round((new_predictions[i][predictions[i]])*100,2)))
         else:
-            print('The {}nd image is {} and the model predicts {}'.format(i+1,dictionary.get(predictions[i]),dictionary.get(y[1][i])))
+            print('The {}nd image is {} and the model predicts {} with a {}% of confidence'.format(i+1,dictionary.get(y[i][1]),dictionary.get(predictions[i]),round((new_predictions[i][predictions[i]])*100,2)))
+
+
+def load_internet_image(list_data_dir,IMG_SIZE=200):
+  categories = ['NORMAL', 'PNEUMONIA']
+  img_list=[]
+  for datadir in list_data_dir:
+    img_array = cv2.imread(datadir, cv2.IMREAD_GRAYSCALE)   # resizes the original image to a IMG_SIZE
+    new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))    # resizes the original image to a IMG_SIZE
+    #datadir=datadir.split('/')
+    print('Write the type of the X Ray image(normal or pneumonia):')
+    response=input()    # Set category by index in categories: 0 -> Normal, 1 -> Pneumonia
+    response=response.upper()
+    class_num = categories.index(str(response))
+    print(class_num)
+    img_list.append([new_array,class_num])              # Appends to the list a tuple with array resized and each label
+  X,y = createxy(img_list)
+  X = np.array(X).reshape(-1,IMG_SIZE,IMG_SIZE,1)
+  print(y)
+  if len(y)==1:
+      if y==[1]:
+          y=[[0,1]]
+      else: y= [[1,0]]
+  else: y = to_categorical(y)
+  print(y)
+  return X,y
