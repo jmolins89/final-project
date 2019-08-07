@@ -206,13 +206,14 @@ def predict_new_images(path,X,y):
         if i==0:
             try:
                 print(y)
-                print('The {}st image is {} and the model predicts {} with a {}% of confidence'.format(i+1,dictionary.get(y[i][1]),dictionary.get(predictions[i]),round((new_predictions[i][predictions[i]])*100,2)))
+                print(predictions)
+                print('The {}st image is {} and the model predicts {} with a {:.2f}% of confidence'.format(i+1,dictionary.get(y[i][1]),dictionary.get(predictions[i]),(new_predictions[i][predictions[i]])*100))
             except:
                 print(y)
-                print('The {}st image is {} and the model predicts {} with a {}% of confidence'.format(i + 1,dictionary.get(y[i][0]), dictionary.get(predictions[i]),round((new_predictions[i][predictions[i]])*100,2)))
+                print('The {}st image is {} and the model predicts {} with a {:.2f}% of confidence'.format(i + 1,dictionary.get(y[i][0]), dictionary.get(predictions[i]),(new_predictions[i][predictions[i]])*100))
         else:
-            print('The {}nd image is {} and the model predicts {} with a {}% of confidence'.format(i+1,dictionary.get(y[i][1]),dictionary.get(predictions[i]),round((new_predictions[i][predictions[i]])*100,2)))
-
+            print('The {}nd image is {} and the model predicts {} with a {:.2f}% of confidence'.format(i+1,dictionary.get(y[i][1]),dictionary.get(predictions[i]),(new_predictions[i][predictions[i]])*100))
+    return new_predictions
 
 def load_internet_image(list_data_dir,IMG_SIZE=200):
   categories = ['NORMAL', 'PNEUMONIA']
@@ -237,3 +238,15 @@ def load_internet_image(list_data_dir,IMG_SIZE=200):
   else: y = to_categorical(y)
   print(y)
   return X,y
+
+def plotting_predictions(predictions,y_theoric):
+    dictionary = {0: 'NORMAL', 1: 'PNEUMONIA'}
+    plt.figure(figsize=(12, 5))
+    for i in range(len(predictions)):
+        plt.subplot(1,len(predictions) , i + 1)
+        plt.bar(['Normal', 'Pneumonia'], predictions[i], color=['g', 'r'])
+        for j in range(len(predictions[i])):
+            plt.text(x=j - 0.1, y=predictions[i][j] / 2, s='{:.2f} %'.format((predictions[i][j]) * 100), size=12)
+        plt.title('This case is suposed to be {},\n and the model predicts:'.format(dictionary.get(y_theoric[i][1])))
+    plt.show()
+

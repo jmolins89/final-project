@@ -31,13 +31,16 @@ def predict(list):
     try:
         X,y = load_new_image(list,200)
         print('Studying if is something wrong...')
-        predict_new_images('/Users/molins/Desktop/final-project/output/cnn-chest-x-ray.h5', X, y)
+        predictions=predict_new_images('/Users/molins/Desktop/final-project/output/cnn-chest-x-ray.h5', X, y)
+        plotting_predictions(predictions,y)
     except:
         X,y = load_internet_image(list,200)
         print(y)
         print('Studying if is something wrong...')
-        predict_new_images('/Users/molins/Desktop/final-project/output/cnn-chest-x-ray.h5', X, y)
-        print('Work in progress...')
+        predictions=predict_new_images('/Users/molins/Desktop/final-project/output/cnn-chest-x-ray.h5', X, y)
+        print(predictions)
+        print(len(predictions))
+        plotting_predictions(predictions,y)
 
 
     #print('Work in progress...')
