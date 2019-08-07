@@ -1,7 +1,8 @@
 from Functions import *
 import argparse
 import warnings
-
+import tensorflow as tf
+import os
 
 def parse():
     parser = argparse.ArgumentParser()  # analizador de argumentos
@@ -30,25 +31,25 @@ def predict(list):
     print('Scanning images...')
     try:
         X,y = load_new_image(list,200)
+        plot_images(X,y,len(y))
         print('Studying if is something wrong...')
         predictions=predict_new_images('/Users/molins/Desktop/final-project/output/cnn-chest-x-ray.h5', X, y)
         plotting_predictions(predictions,y)
     except:
         X,y = load_internet_image(list,200)
-        print(y)
+        plot_images(X, y, len(y))
         print('Studying if is something wrong...')
         predictions=predict_new_images('/Users/molins/Desktop/final-project/output/cnn-chest-x-ray.h5', X, y)
-        print(predictions)
-        print(len(predictions))
         plotting_predictions(predictions,y)
 
 
     #print('Work in progress...')
 
 def main():  # funcion principal
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
     warnings.filterwarnings("ignore")
+    tf.logging.set_verbosity(tf.logging.ERROR)
     args = parse()
-    print(args.images)
     if args.eval: evaluate()
     elif args.pred:  predict(list(args.images))
     else: print(args,'Especifica argumento de entrada -e para evaluar el modelo y -p para evaluar una nueva imagen')
