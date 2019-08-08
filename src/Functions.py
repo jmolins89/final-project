@@ -16,7 +16,7 @@ from keras.utils import to_categorical
 from keras.callbacks import TensorBoard
 from time import time
 from collections import Counter
-
+from sklearn import metrics
 
 
 def createxy(data):
@@ -98,7 +98,7 @@ def plot_confusion_matrix(cm, classes,
     plt.tight_layout()
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
-    plt.show()
+    #plt.show()
 
 def create_training_data(datadir, img_size):
     '''
@@ -165,7 +165,7 @@ def plotting_acc_loss_evolution(model):
     plt.ylabel('loss')
     plt.xlabel('epoch')
     plt.legend()
-    plt.show()
+    #plt.show()
 
 def processing_model(model,X_test,y_test):
     y_test_binary = to_categorical(y_test)
@@ -174,7 +174,7 @@ def processing_model(model,X_test,y_test):
     preds = np.argmax(model.predict(X_test), axis=1)
     cm = confusion_matrix([np.argmax(i) for i in y_test_binary], preds)
     keys = ['NORMAL', 'PNEUMONIA']
-    plt.figure(figsize=(8, 8))
+    plt.figure(figsize=(12, 7.5))
     plot_confusion_matrix(cm, keys, normalize=True)
     return predictions, matrix
 
@@ -185,7 +185,7 @@ def load_new_image(list_data_dir,IMG_SIZE=200):
   categories = ['NORMAL', 'PNEUMONIA']
   img_list=[]
   for datadir in list_data_dir:
-    img_array = cv2.imread(datadir, cv2.IMREAD_GRAYSCALE)   # resizes the original image to a IMG_SIZE
+    img_array = cv2.imread(datadir, cv2.IMREAD_GRAYSCALE)   # reads the original image and convert to gray scale
     new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))    # resizes the original image to a IMG_SIZE
     datadir=datadir.split('/')
     class_num=categories.index(datadir[-2])     # Set category by index in categories: 0 -> Normal, 1 -> Pneumonia

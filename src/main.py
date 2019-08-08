@@ -3,6 +3,9 @@ import argparse
 import warnings
 import tensorflow as tf
 import os
+import time
+import matplotlib.pyplot as plt
+from keras.utils import to_categorical
 
 def parse():
     parser = argparse.ArgumentParser()  # analizador de argumentos
@@ -24,9 +27,16 @@ def evaluate():
     X_test, y_test = importingdata('/Users/molins/Desktop/final-project/src/', 'test')
     print('Loading model...')
     model = loading_model('/Users/molins/Desktop/final-project/output/cnn-chest-x-ray.h5')
-    #model.summary()
+    print('The model structure:')
+    model.summary()
     print('Processing model...')
-    matrix = processing_model(model, X_test, y_test)
+    predictions, matrix= processing_model(model, X_test, y_test)
+    f1, recall, prec, auc = calculate_metrics(to_categorical(y_test),predictions)
+    print('\nF1: {}\n\nRecall: {}\n\nPrecision: {}\n\nAUC: {}\n'.format(f1, recall, prec, auc))
+    time.sleep(3)
+    plt.show()
+
+
 
 def predict(list,labels):
     print('Scanning images...')
