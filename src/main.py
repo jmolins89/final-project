@@ -14,7 +14,7 @@ def parse():
 
 
     parser.add_argument('-i','--images', help='Lista de imágenes a evaluar.',type=str)
-    parser.add_argument('-l','--labels', help='Lista de categorías de las imágenes.',type=str)
+    parser.add_argument('-l','--labels', help='Lista de categorías de las imágenes.',default='P,N',type=str)
 
     return parser.parse_args()
 
@@ -28,7 +28,7 @@ def evaluate():
     print('Processing model...')
     matrix = processing_model(model, X_test, y_test)
 
-def predict(list,labels=['N']):
+def predict(list,labels):
     print('Scanning images...')
     try:
         X,y = load_new_image(list,200)
