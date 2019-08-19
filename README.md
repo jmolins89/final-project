@@ -6,7 +6,28 @@ Final project - Data Analytics Iron Hack
 
 ## Pneumonia detector in chest X-Ray images
 
----
+Pneumonia is an infection that inflames the air sacs in one or both lungs. 
+The air sacs may be filled with fluid, causing cough, fever and difficulties 
+on breathing. 
+
+If the doctor thinks you have pneumonia, he/she may recommend one or more of 
+the following tests:
+
+* **Chest x ray** to look for inflammation in your lungs. This test is the best 
+to diagnosing pneumonia.
+* **Blood tests** to see if your immune system is actively fighting an infection.
+* **Blood culture** to find out whether you have a bacterial infection that has 
+spread to your bloodstream
+
+The pneumonia detection by chest x ray sometimes is difficult also to doctors 
+who have studied long time. The new technologies could be helpful to detect
+pneumonia because it doesn't depend on human factors, it will be automatic.
+
+With machine learning we can teach the computer to detect pneumonia, specifically
+creating a convolutional neural network, which is going to learn how to detect 
+a pneumonia in a chest x ray image.
+
+I've used an [image database from Kaggle](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia)
 
 ![alt text](https://github.com/jmolins89/final-project/blob/master/output/example-images.png)
 
