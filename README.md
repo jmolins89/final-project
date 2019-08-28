@@ -12,7 +12,7 @@ on breathing.
 
 <img src="https://github.com/jmolins89/final-project/blob/master/output/concepto-neumonia_98396-172.jpg" width="40%" height="40%" align="middle">
 
-*In the previous image you can see a lung with pneumonia.*
+*In the previous image you can see a the theoretical difference between a lung with or without pneumonia.*
 
 If the doctor thinks you have pneumonia, he/she may recommend one or more of 
 the following tests:
@@ -25,11 +25,13 @@ spread to your bloodstream
 
 The pneumonia detection by chest x ray sometimes is difficult also to doctors 
 who have studied long time. The new technologies could be helpful to detect
-pneumonia because it doesn't depend on human factors, it will be automatic.
+pneumonia because it doesn't depend on human factors: it will be automatic.
 
 With machine learning we can teach the computer to detect pneumonia, specifically
 creating a **convolutional neural network**, which is going to learn how to detect 
-a pneumonia in a chest x ray image.
+a pneumonia in a chest x ray image. The network is going to receive a lot of images
+of chest x ray and they are going to be studied by the NN in the way to learn how 
+to detect pneumonia.
 
 I've used an [image database from Kaggle](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia)
 to train the model.
@@ -44,16 +46,39 @@ network is going to do this for us. It is going to receive the images and
 the label if it's a pneumonia or not, and the **NN is going to learn when an
 image has pneumonia or not**.
 
-The first step to do this is studying the images of the database, and 
+The image database is compounded by three folders of images: train, test and
+validation, and each of this three folders is compounded by two: NORMAL and PNEUMONIA,
+differentiating images with pneumonia and without pneumonia.
 
-In the following graph we can observe that **the data is unbalanced**, because we have more Pneumonia cases than Normal.
-
-We have to **rebalance** the data to train better a neural network.
+In the following graph we can observe that **the data is unbalanced**, 
+because we have more Pneumonia images than Normal. This is going to work 
+against our NN, because it is going to learn very good to detect a pneumonia but
+it isn't going to detect good the cases without pneumonia.
 
 ![alt text](https://github.com/jmolins89/final-project/blob/master/output/plotting-unbalanced-dataset.png)
 
-We are going to **generate random images of Normal cases**.
+We have to **rebalance** the data in the way to improve the detection of 
+normal cases. We are going to **generate random images of Normal cases**.
+In this version i'm going to generate images manually, by doing zoom on 
+images with the Normal label, as you can see in the following image.
 
-![alt text](https://github.com/jmolins89/final-project/blob/master/output/example-different-way-to-duplicate-images.png)
+![alt text](https://github.com/jmolins89/final-project/blob/master/output/generating-third-images-zoom.png)
+
+In the following graph you can observe the final image distribution. Now 
+the image database is balanced.
+
+![alt text](https://github.com/jmolins89/final-project/blob/master/output/final-not-unbalanced-data-distribution.png)
+
+We can start training the Convolutional Neural Network.
+
+In the following images you can see the results of the final model trained:
+
+![alt text](https://github.com/jmolins89/final-project/blob/master/output/accuracy-loss-evolution-final-model.png) ![alt text](/Users/molins/Desktop/final-project/output/loss-evolution-final-model.png)
+
+![alt text](https://github.com/jmolins89/final-project/blob/master/output/roc-auc-final-model.png) ![alt text](https://github.com/jmolins89/final-project/blob/master/output/confusion-matrix-final-model.png)
+
+
+## Next steps:
+
 
 
