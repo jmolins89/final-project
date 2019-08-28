@@ -10,7 +10,8 @@ Pneumonia is an infection that inflames the air sacs in one or both lungs.
 The air sacs may be filled with fluid, causing cough, fever and difficulties 
 on breathing. 
 
-![alt text](https://github.com/jmolins89/final-project/blob/master/output/concepto-neumonia_98396-172.jpg)
+<img src="https://github.com/jmolins89/final-project/blob/master/output/concepto-neumonia_98396-172.jpg" 
+alt="pneumonia" style="width:100px;height:100px;margin-left: auto;margin-right: auto"/>
 
 *In the previous image you can see a lung with pneumonia.*
 
