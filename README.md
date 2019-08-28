@@ -10,7 +10,7 @@ Pneumonia is an infection that inflames the air sacs in one or both lungs.
 The air sacs may be filled with fluid, causing cough, fever and difficulties 
 on breathing. 
 
-<img src="https://github.com/jmolins89/final-project/blob/master/output/concepto-neumonia_98396-172.jpg" width="40%" height="40%" align="middle">
+<img src="https://github.com/jmolins89/final-project/blob/master/output/concepto-neumonia_98396-172.jpg" width="40%" height="40%" align="center">
 
 *In the previous image you can see a the theoretical difference between a lung with or without pneumonia.*
 
@@ -73,9 +73,9 @@ We can start training the Convolutional Neural Network.
 
 In the following images you can see the results of the final model trained:
 
-![alt text](https://github.com/jmolins89/final-project/blob/master/output/accuracy-loss-evolution-final-model.png) ![alt text](/Users/molins/Desktop/final-project/output/loss-evolution-final-model.png)
+<img src="https://github.com/jmolins89/final-project/blob/master/output/accuracy-loss-evolution-final-model.png" width="300"/> <img src="https://github.com/jmolins89/final-project/blob/master/output/loss-evolution-final-model.png" width="300"/>
 
-![alt text](https://github.com/jmolins89/final-project/blob/master/output/roc-auc-final-model.png) ![alt text](https://github.com/jmolins89/final-project/blob/master/output/confusion-matrix-final-model.png)
+<img src="https://github.com/jmolins89/final-project/blob/master/output/roc-auc-final-model.png" width="300"/> <img src="https://github.com/jmolins89/final-project/blob/master/output/confusion-matrix-final-model.png" width="300"/>
 
 
 ## Next steps:
