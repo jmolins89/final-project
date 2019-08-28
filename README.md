@@ -73,9 +73,9 @@ We can start training the Convolutional Neural Network.
 
 In the following images you can see the results of the final model trained:
 
-<p align="center"><img src="https://github.com/jmolins89/final-project/blob/master/output/accuracy-loss-evolution-final-model.png" width="50%"/> <img src="https://github.com/jmolins89/final-project/blob/master/output/loss-evolution-final-model.png" width="50%"/></p>
+<p align="center"><img src="https://github.com/jmolins89/final-project/blob/master/output/accuracy-loss-evolution-final-model.png" width="40%"/> <img src="https://github.com/jmolins89/final-project/blob/master/output/loss-evolution-final-model.png" width="40%"/></p>
 
-<p align="center" display:inline-block><img src="https://github.com/jmolins89/final-project/blob/master/output/roc-auc-final-model.png" width="50%"/> <img src="https://github.com/jmolins89/final-project/blob/master/output/confusion-matrix-final-model.png" width="50%"/></p>
+<p align="center" display:inline-block><img src="https://github.com/jmolins89/final-project/blob/master/output/roc-auc-final-model.png" width="40%"/> <img src="https://github.com/jmolins89/final-project/blob/master/output/confusion-matrix-final-model.png" width="40%"/></p>
 
 
 ## Next steps:
