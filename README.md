@@ -79,7 +79,7 @@ In the following images you can see the results of the final model trained:
 
 <p align="center" display:inline-block><img src="https://github.com/jmolins89/final-project/blob/master/output/confusion-matrix-final-model.png" width="60%"/></p>
 
-<table align="center"; border=">
+<table align="center"; border="">
 
 | **Paramater**    | **Score** |
 |:----------|:------|
