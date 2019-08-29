@@ -69,7 +69,15 @@ the image database is balanced.
 
 <p align="center"><img src="https://github.com/jmolins89/final-project/blob/master/output/final-not-unbalanced-data-distribution.png" width="85%"/> </p>
 
-We can start training the Convolutional Neural Network.
+Now is the time to create and train the Convolutional Neural Network. 
+
+Trying and training with different architectures for the NN in the way to
+ maximize the results of ***F1,recall,precision*** and ***AUC parameters***, in other words, 
+ having a model which differentiates as best as possible a pneumonia in a chest
+ X-ray image. Finally, the best architecture I've found for the model is like the following:
+ 
+ <p align="center"><img src="https://github.com/jmolins89/final-project/blob/master/output/CNN%20structure.png" width="90%"/></p>
+
 
 In the following images you can see the results of the final model trained:
 
@@ -79,7 +87,6 @@ In the following images you can see the results of the final model trained:
 
 <p align="center" display:inline-block><img src="https://github.com/jmolins89/final-project/blob/master/output/confusion-matrix-final-model.png" width="60%"/></p>
 
-<table align="center"; border="">
 
 | **Paramater**    | **Score** |
 |:----------|:------|
@@ -87,7 +94,10 @@ In the following images you can see the results of the final model trained:
 | ***Recall***    | 0.985 |
 | ***Precision*** | 0.802 |
 | ***AUC***     | 0.860 |
-</table>
+
+The model has been tested with 
+
+The results of the model are improvable
 
 ## Next steps:
 
