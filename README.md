@@ -12,13 +12,13 @@ on breathing.
 
 <p align="center"><img src="https://github.com/jmolins89/final-project/blob/master/output/concepto-neumonia_98396-172.jpg" width="40%" height="40%"></p>
 
-*In the previous image you can see a the theoretical difference between a lung with or without pneumonia.*
+*In the previous image you can see the theoretical difference between a lung with or without pneumonia.*
 
 If the doctor thinks you have pneumonia, he/she may recommend one or more of 
 the following tests:
 
 * **Chest x ray** to look for inflammation in your lungs. This test is the best 
-to diagnosing pneumonia.
+way to diagnose pneumonia.
 * **Blood tests** to see if your immune system is actively fighting an infection.
 * **Blood culture** to find out whether you have a bacterial infection that has 
 spread to your bloodstream
@@ -38,7 +38,7 @@ to train the model.
 
 The images of the database are like the following:
 
-![alt text](https://github.com/jmolins89/final-project/blob/master/output/example-images.png)
+<p align="center"><img src="https://github.com/jmolins89/final-project/blob/master/output/example-images.png" width="85%"/> </p>
 
 **We can't differentiate whether or not there is pneumonia** if we have not
 studied about chest X-Ray images reading. It doesn't matter, because the neural
@@ -55,19 +55,19 @@ because we have more Pneumonia images than Normal. This is going to work
 against our NN, because it is going to learn very good to detect a pneumonia but
 it isn't going to detect good the cases without pneumonia.
 
-![alt text](https://github.com/jmolins89/final-project/blob/master/output/plotting-unbalanced-dataset.png)
+<p align="center"><img src="https://github.com/jmolins89/final-project/blob/master/output/plotting-unbalanced-dataset.png" width="85%"/> </p>
 
 We have to **rebalance** the data in the way to improve the detection of 
 normal cases. We are going to **generate random images of Normal cases**.
 In this version i'm going to generate images manually, by doing zoom on 
 images with the Normal label, as you can see in the following image.
 
-![alt text](https://github.com/jmolins89/final-project/blob/master/output/generating-third-images-zoom.png)
+<p align="center"><img src="https://github.com/jmolins89/final-project/blob/master/output/generating-third-images-zoom.png" width="65%"/> </p>
 
 In the following graph you can observe the final image distribution. Now 
 the image database is balanced.
 
-![alt text](https://github.com/jmolins89/final-project/blob/master/output/final-not-unbalanced-data-distribution.png)
+<p align="center"><img src="https://github.com/jmolins89/final-project/blob/master/output/final-not-unbalanced-data-distribution.png" width="85%"/> </p>
 
 We can start training the Convolutional Neural Network.
 
