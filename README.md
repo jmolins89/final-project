@@ -75,10 +75,19 @@ In the following images you can see the results of the final model trained:
 
 <p align="center"><img src="https://github.com/jmolins89/final-project/blob/master/output/accuracy-loss-evolution-final-model.png" width="40%"/> <img src="https://github.com/jmolins89/final-project/blob/master/output/loss-evolution-final-model.png" width="40%"/></p>
 
-<p align="center" display:inline-block><img src="https://github.com/jmolins89/final-project/blob/master/output/roc-auc-final-model.png" width="40%"/> <img src="https://github.com/jmolins89/final-project/blob/master/output/confusion-matrix-final-model.png" width="40%"/></p>
+<p align="center" display:inline-block><img src="https://github.com/jmolins89/final-project/blob/master/output/roc-auc-final-model.png" width="40%"/></p>
+
+<p align="center" display:inline-block><img src="https://github.com/jmolins89/final-project/blob/master/output/confusion-matrix-final-model.png" width="60%"/></p>
 
 
 ## Next steps:
+
+* [ ] Generate random images with **Image data generator of Keras** to train the model 
+with a greater number of images and train it better.
+* [ ] Train the model with **colour images(RGB)** instead of gray scale images with which 
+I've trained the model.
+* [ ] Get other image databases of chest X-ray with other diseases to train the model on **detecting 
+other diseases and abnormalities**.
 
 
 
